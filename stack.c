@@ -29,16 +29,10 @@ stack_node_t* pop(stack_node_t **head_ref)
 {
 	stack_node_t *head = *head_ref;
 
-	if (!head)
+	if (NULL == head)
 		return NULL;
 
-	if (!head->next) {
-		*head_ref = NULL;
-		return head;
-	}
-	
 	*head_ref = head->next;
-
 	head->next = NULL;
 
 	return head;
@@ -48,15 +42,8 @@ void push(stack_node_t **head_ref, stack_node_t *new_node)
 {
 	stack_node_t *head = *head_ref;
 
-	if (!head) 
-	{	new_node->next = NULL;
-		*head_ref = new_node;
-	}
-	else
-	{
-		new_node->next = head;
-		*head_ref = new_node; 
-	} 
+	new_node->next = head;
+	*head_ref = new_node; 
 }
 
 void stack_print(const stack_node_t *head)
@@ -79,10 +66,9 @@ int main(int argc, char **argv)
 	push(&head, node_new(7));
 	push(&head, node_new(11));
 
-
-	while (head)
+	stack_node_t *p = NULL;
+	while (p = pop(&head))
 	{
-		stack_node_t *p = pop(&head);
 		fprintf(stdout, "%d\n", p->data);
 		node_free(p);
 	}	
