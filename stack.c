@@ -1,12 +1,9 @@
+#include "stack.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct stack_node_t {
-	int data;
-	struct stack_node_t *next;
-} stack_node_t;
-
-stack_node_t* node_new(int data)
+stack_node_t* stack_node_alloc(int data)
 {
 	stack_node_t *node = malloc(sizeof(stack_node_t));
 
@@ -19,23 +16,21 @@ stack_node_t* node_new(int data)
 	return node;
 }
 
-void node_free(stack_node_t *node)
+void stack_node_free(stack_node_t *node)
 {
 	if (node)
 		free(node);
 }
 
-stack_node_t* pop(stack_node_t **head_ref)
+void pop(stack_node_t **head_ref)
 {
-	stack_node_t *head = *head_ref;
+	stack_node_t *node = *head_ref;
 
-	if (NULL == head)
-		return NULL;
-
-	*head_ref = head->next;
-	head->next = NULL;
-
-	return head;
+	if (node)
+	{
+		*head_ref = node->next;
+		stack_node_free(node);
+	}
 }
 
 void push(stack_node_t **head_ref, stack_node_t *new_node)
@@ -46,31 +41,21 @@ void push(stack_node_t **head_ref, stack_node_t *new_node)
 	*head_ref = new_node; 
 }
 
-void stack_print(const stack_node_t *head)
-{
-	const stack_node_t *p = head;
-
-	while (p) 
-	{
-		fprintf(stdout, "%d\n", p->data);
-		p = p->next;
-	}
-}
-
-int main(int argc, char **argv)
+int _main(int argc, char **argv)
 {
 	stack_node_t *head = NULL;
 	
-	push(&head, node_new(3));
-	push(&head, node_new(5));
-	push(&head, node_new(7));
-	push(&head, node_new(11));
+	push(&head, stack_node_alloc(3));
+	push(&head, stack_node_alloc(5));
+	push(&head, stack_node_alloc(7));
+	push(&head, stack_node_alloc(11));
+	
+	pop(&head);
 
-	stack_node_t *p = NULL;
-	while (p = pop(&head))
+	while (head)
 	{
-		fprintf(stdout, "%d\n", p->data);
-		node_free(p);
+		fprintf(stdout, "%d\n", head->data);
+		pop(&head);
 	}	
 
 	return 0;
