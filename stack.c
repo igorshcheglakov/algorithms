@@ -41,22 +41,22 @@ void push(stack_node_t **head_ref, stack_node_t *new_node)
 	*head_ref = new_node; 
 }
 
-int _main(int argc, char **argv)
-{
-	stack_node_t *head = NULL;
-	
-	push(&head, stack_node_alloc(3));
-	push(&head, stack_node_alloc(5));
-	push(&head, stack_node_alloc(7));
-	push(&head, stack_node_alloc(11));
-	
-	pop(&head);
-
-	while (head)
-	{
-		fprintf(stdout, "%d\n", head->data);
-		pop(&head);
-	}	
-
-	return 0;
-}
+//int main(int argc, char **argv)
+//{
+//	stack_node_t *head = NULL;
+//	
+//	push(&head, stack_node_alloc(3));
+//	push(&head, stack_node_alloc(5));
+//	push(&head, stack_node_alloc(7));
+//	push(&head, stack_node_alloc(11));
+//	
+//	pop(&head);
+//
+//	while (head)
+//	{
+//		fprintf(stdout, "%d\n", head->data);
+//		pop(&head);
+//	}	
+//
+//	return 0;
+//}

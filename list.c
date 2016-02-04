@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-node_t* node_new(int data)
+list_node_t* list_node_alloc(int data)
 {
-	node_t *node = malloc(sizeof(node_t));
+	list_node_t *node = malloc(sizeof(list_node_t));
 
 	if (!node)
 		return NULL;
@@ -15,13 +15,13 @@ node_t* node_new(int data)
 	node->prev = NULL;
 }
 
-void node_free(node_t *node)
+void list_node_free(list_node_t *node)
 {
 	if (node)
 		free(node);
 }
 
-static void push_first(list_t *list, node_t *node)
+static void push_first(list_t *list, list_node_t *node)
 {
 	node->next = NULL;
 	node->prev = NULL;
@@ -56,10 +56,10 @@ void list_free(list_t *list)
 
 void list_cleanse(list_t *list)
 {
-	node_t *p = list->head;
+	list_node_t *p = list->head;
 	while (p) 
 	{
-		node_t *tmp = p;
+		list_node_t *tmp = p;
 		p = p->next;
 		free(tmp);
 	}
@@ -68,7 +68,7 @@ void list_cleanse(list_t *list)
 	list->tail = NULL;
 }
 
-void list_push_back(list_t *list, node_t *node)
+void list_push_back(list_t *list, list_node_t *node)
 {
 	if (!list->head)
 	{	
@@ -83,7 +83,7 @@ void list_push_back(list_t *list, node_t *node)
 	} 
 }
 
-void list_push_front(list_t *list, node_t *node)
+void list_push_front(list_t *list, list_node_t *node)
 {
 	if (!list->head)
 	{
@@ -98,20 +98,9 @@ void list_push_front(list_t *list, node_t *node)
 	} 
 }
 
-
-//void node_delete(node_t *node)
-//{
-//	node_t *tmp = node;
-//	node_t *prev;
-//	node_t *next;
-//
-//	if (!node->prev)
-//
-//}
-
-node_t* list_pop_back(list_t *list)
+list_node_t* list_pop_back(list_t *list)
 {
-	node_t *back_node = list->tail;
+	list_node_t *back_node = list->tail;
 	if (!back_node)
 		return NULL;
 
@@ -131,9 +120,9 @@ node_t* list_pop_back(list_t *list)
 	return back_node;
 }
 
-node_t* list_pop_front(list_t *list)
+list_node_t* list_pop_front(list_t *list)
 {
-	node_t *front_node = list->head;
+	list_node_t *front_node = list->head;
 	if (!front_node)
 		return NULL;
 
@@ -154,7 +143,7 @@ node_t* list_pop_front(list_t *list)
 
 void list_print(list_t *list)
 {
-	node_t *p = list->head;
+	list_node_t *p = list->head;
 	while (p)
 	{
 		fprintf(stdout, "%d\n", p->data);
@@ -162,24 +151,24 @@ void list_print(list_t *list)
 	} 
 }
 
-int main(int argc, char **argv)
-{
-
-	list_t *list = list_new();	
-
-	list_push_back(list, node_new(2));
-	list_push_back(list, node_new(5));
-	list_push_back(list, node_new(7));
-	list_push_back(list, node_new(11));
-
-	node_t *back = list_pop_back(list);
-	node_t *front = list_pop_front(list);
-	
-	node_free(back);
-	node_free(front);
-
-	list_print(list);
-	list_free(list);
-
-	return 0;
-}
+//int main(int argc, char **argv)
+//{
+//
+//	list_t *list = list_new();	
+//
+//	list_push_back(list, list_node_alloc(2));
+//	list_push_back(list, list_node_alloc(5));
+//	list_push_back(list, list_node_alloc(7));
+//	list_push_back(list, list_node_alloc(11));
+//
+//	list_node_t *back = list_pop_back(list);
+//	list_node_t *front = list_pop_front(list);
+//	
+//	list_node_free(back);
+//	list_node_free(front);
+//
+//	list_print(list);
+//	list_free(list);
+//
+//	return 0;
+//}
