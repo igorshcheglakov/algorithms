@@ -1,0 +1,15 @@
+undershorts -> compression shorts
+compression shorts -> cup
+compression shorts -> hose
+socks -> hose
+cup -> pants
+hose -> pants
+pants -> sweater
+pants -> skates
+skates -> leg pads
+leg pads -> catch glove
+T-shirt -> chest pad
+chest pad -> sweater
+sweater -> mask
+mask -> catch glove
+catch glove -> blocker

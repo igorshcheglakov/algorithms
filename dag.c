@@ -14,21 +14,8 @@ int adjacency_matrix[VERTEX_NUM][VERTEX_NUM] = {0};
 int in_degree[VERTEX_NUM] = {0};
 int linear_order[VERTEX_NUM] = {0};
 
+list_node_t *adjacency_list[VERTEX_NUM] = {0};
 
-list_t adjacency_list[VERTEX_NUM];
-
-
-int next(void)
-{
-	int i;
-	for (i=0; i<VERTEX_NUM; i++)
-		if (in_degree[i] == 0) {
-			in_degree[i] = -1;
-			return i;
-		}
-
-	return -1;
-}
 
 int read()
 {
@@ -125,15 +112,6 @@ int read()
 	for (i=0; i<VERTEX_NUM; i++)
 		fprintf(stdout, "%s\n", items[linear_order[i]]);
 	
-
-//	int i,j;
-//
-//	for (i=0; i<14;i++) {
-//		for (j=0; j<13;j++)
-//			fprintf(stdout, "%d ", adjacency_matrix[i][j]);	
-//		fprintf(stdout, "%d\n", adjacency_matrix[i][j]);	
-// 	}	
-
 
 	return 0;
 
